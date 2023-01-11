@@ -1,0 +1,123 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.30'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'org.jetbrains.kotlin.android'
+    id("kotlin-parcelize")
+}
+
+android {
+    compileSdkVersion 33
+    flavorDimensions "default"
+
+    defaultConfig {
+        applicationId "com.aslamhossin.movies"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            manifestPlaceholders = [
+                    APP_NAME: "MoviesDev",
+                    env     : "dev"
+            ]
+            buildConfigField "String", "API_URL", '"https://www.jsonkeeper.com/"'
+        }
+        staging {
+            dimension "default"
+            applicationIdSuffix ".staging"
+            //signingConfig signingConfigs.staging
+            manifestPlaceholders = [
+                    APP_NAME: "MoviesStaging",
+                    env     : "staging"
+            ]
+            buildConfigField "String", "API_URL", '"https://www.jsonkeeper.com/"'
+        }
+        production {
+            dimension "default"
+            //signingConfig signingConfigs.production
+            manifestPlaceholders = [
+                    APP_NAME: "Movies",
+                    env     : "production"
+            ]
+            buildConfigField "String", "API_URL", '"https://www.jsonkeeper.com/"'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    namespace 'com.aslamhossin.movies'
+    applicationVariants.all {
+        // Return compile configuration objects of a variant.
+        compileConfiguration.resolutionStrategy {}
+        // Return runtime configuration objects of a variant.
+        runtimeConfiguration.resolutionStrategy {}
+        // Return annotation processor configuration of a variant.
+        annotationProcessorConfiguration.resolutionStrategy {}
+    }
+}
+
+
+
+dependencies {
+
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}")
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.json}"
+
+    implementation "androidx.core:core-ktx:${versions.ktx_core}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraint_layout}"
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.junit_ext}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+
+
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    kapt "com.google.dagger:hilt-compiler:${versions.hilt}"
+
+
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${versions.retrofit_converter}")
+    implementation("com.squareup.retrofit2:retrofit:${versions.retrofit}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${versions.okhttp}")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:${versions.navigation}")
+    implementation("androidx.navigation:navigation-ui-ktx:${versions.navigation}")
+
+
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
+
+    implementation("androidx.datastore:datastore-preferences:${versions.datastore}")
+
+
+}

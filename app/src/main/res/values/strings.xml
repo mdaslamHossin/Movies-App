@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="sort">Sort</string>
+    <string name="movies">Movies</string>
+    <string name="add_to_watchlist">Add to Watchlist</string>
+    <string name="watch_trailer">Watch trailer</string>
+    <string name="short_description">Short Description</string>
+    <string name="on_my_watchlist">on my watchlist</string>
+
+</resources>

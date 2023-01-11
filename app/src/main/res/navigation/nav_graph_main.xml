@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/movies_fragment">
+
+
+    <fragment
+        android:id="@+id/movies_fragment"
+        android:name="com.aslamhossin.movies.features.movies.MoviesFragment"
+        tools:layout="@layout/fragment_movies">
+        <argument
+            android:name="movie"
+            app:argType="com.aslamhossin.movies.domain.model.MovieModel"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@+id/movie_detail_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movie_detail_fragment"
+        android:name="com.aslamhossin.movies.features.movie_detail.MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="movie"
+            app:argType="com.aslamhossin.movies.domain.model.MovieModel"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>
